@@ -1,7 +1,7 @@
 /**
  * TryMe v1.0.0 - https://github.com/Digidemic/TryMe
  * (c) 2023 DIGIDEMIC, LLC - All Rights Reserved
- * Cheers developed by Adam Steinberg of DIGIDEMIC, LLC
+ * TryMe developed by Adam Steinberg of DIGIDEMIC, LLC
  * License: Apache License 2.0
  *
  * ====
