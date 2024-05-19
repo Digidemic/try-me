@@ -1,11 +1,12 @@
 plugins {
-    id 'com.android.library'
-    id 'org.jetbrains.kotlin.android'
+    id 'com.android.library' version '8.0.2'
+    id 'org.jetbrains.kotlin.android' version '1.6.20'
+    id 'maven-publish'
 }
 
 android {
     namespace 'com.digidemic.tryme'
-    compileSdk 34
+    compileSdk 33
 
     defaultConfig {
         minSdk 4
@@ -27,13 +28,59 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+        freeCompilerArgs += [
+            "-Xopt-in=kotlin.RequiresOptIn"
+        ]
+    }
+
+    publishing {
+        singleVariant("release") {
+            withJavadocJar()
+        }
     }
 }
 
 dependencies {
-
-
     testImplementation 'junit:junit:4.13.2'
     testImplementation "io.mockk:mockk-android:1.13.5"
     testImplementation "io.mockk:mockk-agent:1.13.5"
+}
+
+afterEvaluate {
+    android.libraryVariants.each {variant ->
+        publishing.publications.create(variant.name, MavenPublication){
+            from components.findByName(variant.name)
+
+            groupId = 'com.github.tryme'
+            artifactId = "tryme"
+            version = '1.1.0'
+
+            pom {
+                name = 'TryMe'
+                description = 'For "I don\'t care that an exception was thrown, just keep going" uses.'
+                url = 'https://github.com/Digidemic/try-me'
+
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = 'Digidemic'
+                        name = 'Adam Steinberg'
+                        email = 'digidemic@gmail.com'
+                    }
+                }
+
+                scm {
+                    connection = 'scm:git://github.com/Digidemic/try-me.git'
+                    developerConnection = 'scm:git://github.com/Digidemic/try-me.git'
+                    url = 'git://github.com/Digidemic/try-me.git'
+                }
+            }
+        }
+    }
 }

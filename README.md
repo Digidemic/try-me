@@ -84,7 +84,10 @@ val arrValueOrDefault: String =
   - Optionally, a [defaultReturnValue](#main-syntax) argument can be included where that value is returned only if an exception is caught.
 - Rather than a mandatory catch block, optionally and just once, create a global catch block (see [GlobalConfig](#global-settings)) that will only be called when TryMe throws an exception anywhere in your app!
 - No code compromise using TryMe over the standard `try`. The same code that can handled in a `try` can be handled in TryMe!
-<br><br>
+
+### Check out the [example app for TryMe](/example-tryme/)!
+
+<br>
 
 ## Table of Contents
 - [Examples](#examples)
@@ -160,24 +163,33 @@ The following are the settings set to their default values.
 
 ## Installation
 
-### Install with AAR and gradle (Local)
-1) Download the latest [tryme.aar](tryme.aar).
-2) Move `tryme.aar` to your project's `libs` directory (Example: `YourProject/app/libs/`).
-3) In your `build.gradle`, add <b>only one</b> of the following to your `dependencies { }`:
+### Install with JitPack
+[![](https://jitpack.io/v/Digidemic/try-me.svg)](https://jitpack.io/#Digidemic/try-me)
+1) Add JitPack to your project's root `build.gradle` at the end of `repositories`:
 - ```groovy
-  // adds only tryme.aar
-  implementation fileTree(dir: "libs", include: ["tryme.aar"])
-  
-  // OR
-
-  // adds all .aar files in your libs directory.
-  implementation fileTree(dir: "libs", include: ["*.aar"]) 
+  dependencyResolutionManagement {
+      repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+      repositories {
+          mavenCentral()
+          maven { url 'https://jitpack.io' }
+    }
+  }
   ```
-4) [Sync gradle](https://www.delasign.com/blog/how-to-sync-an-android-project-with-its-gradle-files-in-android-studio/) successfully.
-5) Done! Your Android project is now ready to use Try Me. Go to [Examples](#examples) or [Syntax](#syntax) for Try Me usage!
+2) In the `build.gradle` of the module(s) you wish to use TryMe with, add the following to `dependencies`:
+- ```groovy
+  dependencies {
+      // Required: Installs the .aar without any documentation.
+      implementation 'com.github.digidemic:try-me:1.1.0'
+      
+      // Optional: Displays documentation while writing coding. 
+      implementation 'com.github.digidemic:try-me:1.1.0:javadoc'
 
-### Install with gradle (Remote)
->Coming soon!
+      // Optional: Displays documentation (more comprehensive than javadoc in some cases) and uncompiled code when stepping into library.
+      implementation 'com.github.digidemic:try-me:1.1.0:sources'
+  }
+  ```
+3) [Sync gradle](https://www.delasign.com/blog/how-to-sync-an-android-project-with-its-gradle-files-in-android-studio/) successfully.
+4) Done! Your Android project is now ready to use TryMe. Go to [Examples](#examples) or [Syntax](#syntax) for TryMe usage!
 
 <br>
 
@@ -192,7 +204,7 @@ The following are the settings set to their default values.
 ## License
 Try Me created by Adam Steinberg of DIGIDEMIC, LLC
 ```
-Copyright 2023 DIGIDEMIC, LLC
+Copyright 2024 DIGIDEMIC, LLC
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
