@@ -1,12 +1,12 @@
 /**
- * TryMe v1.0.0 - https://github.com/Digidemic/TryMe
- * (c) 2023 DIGIDEMIC, LLC - All Rights Reserved
+ * TryMe v1.1.0 - https://github.com/Digidemic/try-me
+ * (c) 2024 DIGIDEMIC, LLC - All Rights Reserved
  * TryMe developed by Adam Steinberg of DIGIDEMIC, LLC
  * License: Apache License 2.0
  *
  * ====
  *
- * Copyright 2023 DIGIDEMIC, LLC
+ * Copyright 2024 DIGIDEMIC, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,10 +50,11 @@ object Try {
          * [catchAction] by default does nothing being set to {}.
          * [catchAction] can be updated at anytime but is recommended to
          *  do so as early as possible (like in your main activity's OnCreate()).
-
          *
          * Reassigning Example: Try.GlobalConfig.catchAction = { Log.d("TryMeCaught", it.message, it) }
          */
+        @JvmStatic
+        @Volatile
         var catchAction: (Exception) -> Unit = {}
     }
 
